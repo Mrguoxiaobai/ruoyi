@@ -683,3 +683,19 @@ create table gen_table_column (
   update_time       datetime                                   comment '更新时间',
   primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
+
+-- ----------------------------
+-- 20、历年体检数据
+-- ----------------------------
+drop table if exists ecg_year_count;
+create table ecg_year_count(
+    year_count_id  bigint(20)      not null auto_increment    comment '编号',
+    year int comment '年份',
+    p_count int comment '体检人数',
+    p_centage varchar(10) comment '体检率',
+    create_by         varchar(64)     default ''                 comment '创建者',
+    create_time       datetime                                   comment '创建时间',
+    update_by         varchar(64)     default ''                 comment '更新者',
+    update_time       datetime                                   comment '更新时间',
+    primary key (year_count_id)
+)engine=innodb auto_increment=1 comment = '历年体检数据表';
