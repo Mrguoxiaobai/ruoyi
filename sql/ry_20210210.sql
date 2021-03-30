@@ -699,3 +699,18 @@ create table ecg_year_count(
     update_time       datetime                                   comment '更新时间',
     primary key (year_count_id)
 )engine=innodb auto_increment=1 comment = '历年体检数据表';
+
+-- ----------------------------
+-- 21、重大阳性项目表
+-- ----------------------------
+drop table if exists health_item;
+create table health_item(
+    health_item_id bigint(20)      not null auto_increment       comment '编号',
+    dept_id           bigint(20)      default null               comment '部门ID',
+    health_item_name  varchar(20)                                comment '项目名称',
+    create_by         varchar(64)     default ''                 comment '创建者',
+    create_time       datetime                                   comment '创建时间',
+    update_by         varchar(64)     default ''                 comment '更新者',
+    update_time       datetime                                   comment '更新时间',
+    primary key (health_item_id)
+)engine=innodb auto_increment=1 comment = '重大阳性项目表';
