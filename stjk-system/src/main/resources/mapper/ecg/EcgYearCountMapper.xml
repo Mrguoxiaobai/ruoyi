@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ecg.EcgYearCountMapper">
+    
+    <resultMap type="EcgYearCount" id="EcgYearCountResult">
+        <result property="yearCountId"    column="year_count_id"    />
+        <result property="year"    column="year"    />
+        <result property="pCount"    column="p_count"    />
+        <result property="pCentage"    column="p_centage"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectEcgYearCountVo">
+        select year_count_id, year, p_count, p_centage, create_by, create_time, update_by, update_time from ecg_year_count
+    </sql>
+
+    <select id="selectEcgYearCountList" parameterType="EcgYearCount" resultMap="EcgYearCountResult">
+        <include refid="selectEcgYearCountVo"/>
+        <where>  
+            <if test="year != null "> and year = #{year}</if>
+            <if test="pCount != null "> and p_count = #{pCount}</if>
+            <if test="pCentage != null  and pCentage != ''"> and p_centage = #{pCentage}</if>
+        </where>
+    </select>
+    
+    <select id="selectEcgYearCountById" parameterType="Long" resultMap="EcgYearCountResult">
+        <include refid="selectEcgYearCountVo"/>
+        where year_count_id = #{yearCountId}
+    </select>
+        
+    <insert id="insertEcgYearCount" parameterType="EcgYearCount" useGeneratedKeys="true" keyProperty="yearCountId">
+        insert into ecg_year_count
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="year != null">year,</if>
+            <if test="pCount != null">p_count,</if>
+            <if test="pCentage != null">p_centage,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="year != null">#{year},</if>
+            <if test="pCount != null">#{pCount},</if>
+            <if test="pCentage != null">#{pCentage},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEcgYearCount" parameterType="EcgYearCount">
+        update ecg_year_count
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="year != null">year = #{year},</if>
+            <if test="pCount != null">p_count = #{pCount},</if>
+            <if test="pCentage != null">p_centage = #{pCentage},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where year_count_id = #{yearCountId}
+    </update>
+
+    <delete id="deleteEcgYearCountById" parameterType="Long">
+        delete from ecg_year_count where year_count_id = #{yearCountId}
+    </delete>
+
+    <delete id="deleteEcgYearCountByIds" parameterType="String">
+        delete from ecg_year_count where year_count_id in 
+        <foreach item="yearCountId" collection="array" open="(" separator="," close=")">
+            #{yearCountId}
+        </foreach>
+    </delete>
+</mapper>
