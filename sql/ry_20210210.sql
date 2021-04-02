@@ -726,3 +726,55 @@ create table  health_info(
     update_time      datetime                                   comment '更新时间',
     primary key (info_id)
 )engine=innodb auto_increment=1 comment = '重大阳性信息表';
+
+-- ----------------------------
+-- 22、体检者信息表
+-- ----------------------------
+drop table if exists PeisPatient;
+CREATE TABLE PeisPatient(
+        PeisPatient_id          bigint(20)      not null auto_increment    comment '编号',
+        ID_Patient          int                      comment '体检号',
+        PatientCode	        varchar (50)	         comment  '体检代码 ',
+        PatientCardNo	    varchar (30)	         comment  '一卡通号 ',
+        PatientBizNo	    varchar (50)	         comment  '业务编号 ',
+        IDCardNo	        varchar (30)	         comment  '身份证号 ',
+        PatientName	        varchar (30)	         comment  '姓名 ',
+        Input_Code	        varchar (8)	             comment  '输入码 ',
+        Org_Name	        varchar (50)	         comment  '团体名称 ',
+        Org_Depart	        varchar (30)	         comment  '团体部门 ',
+        Org_DepartSubA      varchar(30)              comment  '公共卫生场所',
+        Org_DepartSubB      varchar(30)              comment  '',
+        Org_DepartSubC      varchar(30)              comment  '调度员',
+        Org_DepartSubD      varchar(30)              comment  '机车乘务员',
+        Sex	                varchar (8)	             comment  '性别 ',
+        BirthDate	        datetime       NULL	     comment  '出生日期 ',
+        Age	                int NULL	             comment  '年龄 ',
+        Marriage	        varchar (4)	             comment  '婚姻 ',
+        Nation	            varchar (16)	         comment  '民族 ',
+        Address	            varchar (120)	         comment  '地址 ',
+        Email	            varchar (80)	         comment  '电子邮件 ',
+        Phone	            varchar (30)	         comment  '电话 ',
+        Education	        varchar (20)	         comment  '教育 ',
+        Occupation	        varchar (20)	         comment  '职业 ',
+        ResArea	            varchar (40)	         comment  '地区 ',
+        DateCreated	        datetime       NULL	     comment  '记录创建时间 ',
+        F_Registered	    bit                      comment  '已登记 ',
+        DateRegister	    datetime       NULL	     comment  '登记时间 ',
+        Position_Code	    varchar (6)	             comment  '位置 ',
+        GuidanceNote	    text	                 comment  '指引单说明 ',
+        WorkNo	            varchar (20)	         comment  '工号 ',
+        DoctorReg	        varchar (16)	         comment  '登记员 ',
+        ExamSuite_Name	    varchar (50)	         comment  '套餐名称 ',
+        F_Paused	        bit           	         comment  '禁检 ',
+        DoctorFinal_Name_R	varchar (12)	         comment  '总检医生 ',
+        DateFinalExamed	    datetime NULL	         comment  '总检时间 ',
+        DateReportPrinted	datetime NULL	         comment  '报告打印日期 ',
+        Note	            varchar (30)	         comment  '备注 ',
+        Conclusion	        text	                 comment  '综述 ',
+        ConclusionSummary	text	                 comment  '结论 ',
+        Suggestion	        text	                 comment  '建议 ',
+        PositiveSummary	    text	                 comment  '阳性综述 ',
+        primary key (PeisPatient_id)
+        )engine=innodb auto_increment=1 comment = '体检者信息表';
+
+

@@ -204,7 +204,7 @@
           <el-table-column label="体检号" align="center" prop="infoCode"/>
           <el-table-column label="身份证号" align="center" prop="infoCardno"/>
           <el-table-column label="姓名" align="center" prop="infoName"/>
-          <el-table-column label="年龄" align="center" prop="infoAge" :formatter="infoAgeFormat"/>
+          <el-table-column label="年龄" align="center" prop="infoAge" />
           <el-table-column label="性别" align="center" prop="infoSex" :formatter="infoSexFormat"/>
           <el-table-column label="科室名称" align="center" prop="deptName"/>
           <el-table-column label="项目名称" align="center" prop="healthItemName"/>
