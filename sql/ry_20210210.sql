@@ -689,10 +689,10 @@ create table gen_table_column (
 -- ----------------------------
 drop table if exists ecg_year_count;
 create table ecg_year_count(
-    year_count_id  bigint(20)      not null auto_increment    comment '编号',
-    year int comment '年份',
-    p_count int comment '体检人数',
-    p_centage varchar(10) comment '体检率',
+    year_count_id     bigint(20)      not null auto_increment    comment '编号',
+    year              int                                        comment '年份',
+    p_count           int                                        comment '体检人数',
+    p_centage         varchar(10)                                comment '体检率',
     create_by         varchar(64)     default ''                 comment '创建者',
     create_time       datetime                                   comment '创建时间',
     update_by         varchar(64)     default ''                 comment '更新者',
@@ -701,16 +701,28 @@ create table ecg_year_count(
 )engine=innodb auto_increment=1 comment = '历年体检数据表';
 
 -- ----------------------------
--- 21、重大阳性项目表
+-- 21、重大阳性信息表
 -- ----------------------------
-drop table if exists health_item;
-create table health_item(
-    health_item_id bigint(20)      not null auto_increment       comment '编号',
-    dept_id           bigint(20)      default null               comment '部门ID',
-    health_item_name  varchar(20)                                comment '项目名称',
-    create_by         varchar(64)     default ''                 comment '创建者',
-    create_time       datetime                                   comment '创建时间',
-    update_by         varchar(64)     default ''                 comment '更新者',
-    update_time       datetime                                   comment '更新时间',
-    primary key (health_item_id)
-)engine=innodb auto_increment=1 comment = '重大阳性项目表';
+drop table if exists health_info;
+create table  health_info(
+    info_id          bigint(20)      not null auto_increment    comment '编号',
+    info_code        varchar(50)                                comment '体检号',
+    info_cardno      varchar(50)                                comment '身份号',
+    info_name        varchar(20)                                comment '姓名',
+    info_sex         char(1)         default '0'                comment '用户性别（0男 1女 2未知）',
+    info_age         int(20)                                    comment '年龄',
+    dept_id          bigint(20)                                 comment '科室ID',
+    health_item_id   bigint(20)                                 comment '项目ID',
+    info_phone       varchar(30)                                comment '手机号',
+    info_inform      char(1)         default '0'                comment '是否通知本人(0未通知 1已通知)',
+    info_result      varchar(1000)                              comment '重大阳性结果',
+    info_dept        varchar(100)                               comment '单位名称',
+    info_hospital    varchar(1000)                              comment '诊治经过',
+    info_consequence varchar(1000)                              comment '诊治结果',
+    info_doctor      varchar(20)                                comment '体检医师',
+    create_by        varchar(64)     default ''                 comment '创建者',
+    create_time      datetime                                   comment '创建时间',
+    update_by        varchar(64)     default ''                 comment '更新者',
+    update_time      datetime                                   comment '更新时间',
+    primary key (info_id)
+)engine=innodb auto_increment=1 comment = '重大阳性信息表';

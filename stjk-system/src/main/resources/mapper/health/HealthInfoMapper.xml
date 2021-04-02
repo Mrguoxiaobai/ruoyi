@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.health.HealthInfoMapper">
+    
+    <resultMap type="HealthInfo" id="HealthInfoResult">
+        <result property="infoId"    column="info_id"    />
+        <result property="infoCode"    column="info_code"    />
+        <result property="infoCardno"    column="info_cardno"    />
+        <result property="infoName"    column="info_name"    />
+        <result property="infoSex"    column="info_sex"    />
+        <result property="infoAge"    column="info_age"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="healthItemId"    column="health_item_id"    />
+        <result property="infoPhone"    column="info_phone"    />
+        <result property="infoInform"    column="info_inform"    />
+        <result property="infoResult"    column="info_result"    />
+        <result property="infoDept"    column="info_dept"    />
+        <result property="infoHospital"    column="info_hospital"    />
+        <result property="infoConsequence"    column="info_consequence"    />
+        <result property="infoDoctor"    column="info_doctor"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectHealthInfoVo">
+        select info_id, info_code, info_cardno, info_name, info_sex, info_age, dept_id, health_item_id, info_phone, info_inform, info_result, info_dept, info_hospital, info_consequence, info_doctor, create_by, create_time, update_by, update_time from health_info
+    </sql>
+
+    <select id="selectHealthInfoList" parameterType="HealthInfo" resultMap="HealthInfoResult">
+        <include refid="selectHealthInfoVo"/>
+        <where>  
+            <if test="infoCode != null  and infoCode != ''"> and info_code = #{infoCode}</if>
+            <if test="infoCardno != null  and infoCardno != ''"> and info_cardno = #{infoCardno}</if>
+            <if test="infoName != null  and infoName != ''"> and info_name like concat('%', #{infoName}, '%')</if>
+            <if test="infoSex != null  and infoSex != ''"> and info_sex = #{infoSex}</if>
+            <if test="infoAge != null "> and info_age = #{infoAge}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="healthItemId != null "> and health_item_id = #{healthItemId}</if>
+            <if test="infoInform != null  and infoInform != ''"> and info_inform = #{infoInform}</if>
+            <if test="infoResult != null  and infoResult != ''"> and info_result like concat('%', #{infoResult}, '%')</if>
+            <if test="infoDept != null  and infoDept != ''"> and info_dept like concat('%', #{infoDept}, '%')</if>
+            <if test="infoHospital != null  and infoHospital != ''"> and info_hospital like concat('%', #{infoHospital}, '%')</if>
+            <if test="infoConsequence != null  and infoConsequence != ''"> and info_consequence like concat('%', #{infoConsequence}, '%')</if>
+            <if test="infoDoctor != null  and infoDoctor != ''"> and info_doctor like concat('%', #{infoDoctor}, '%')</if>
+            <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="updateBy != null  and updateBy != ''"> and update_by = #{updateBy}</if>
+            <if test="updateTime != null "> and update_time = #{updateTime}</if>
+        </where>
+        order by info_cardno
+    </select>
+    
+    <select id="selectHealthInfoById" parameterType="Long" resultMap="HealthInfoResult">
+        <include refid="selectHealthInfoVo"/>
+        where info_id = #{infoId}
+    </select>
+        
+    <insert id="insertHealthInfo" parameterType="HealthInfo" useGeneratedKeys="true" keyProperty="infoId">
+        insert into health_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="infoCode != null and infoCode != ''">info_code,</if>
+            <if test="infoCardno != null and infoCardno != ''">info_cardno,</if>
+            <if test="infoName != null and infoName != ''">info_name,</if>
+            <if test="infoSex != null">info_sex,</if>
+            <if test="infoAge != null">info_age,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="healthItemId != null">health_item_id,</if>
+            <if test="infoPhone != null">info_phone,</if>
+            <if test="infoInform != null and infoInform != ''">info_inform,</if>
+            <if test="infoResult != null and infoResult != ''">info_result,</if>
+            <if test="infoDept != null">info_dept,</if>
+            <if test="infoHospital != null and infoHospital != ''">info_hospital,</if>
+            <if test="infoConsequence != null and infoConsequence != ''">info_consequence,</if>
+            <if test="infoDoctor != null and infoDoctor != ''">info_doctor,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="infoCode != null and infoCode != ''">#{infoCode},</if>
+            <if test="infoCardno != null and infoCardno != ''">#{infoCardno},</if>
+            <if test="infoName != null and infoName != ''">#{infoName},</if>
+            <if test="infoSex != null">#{infoSex},</if>
+            <if test="infoAge != null">#{infoAge},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="healthItemId != null">#{healthItemId},</if>
+            <if test="infoPhone != null">#{infoPhone},</if>
+            <if test="infoInform != null and infoInform != ''">#{infoInform},</if>
+            <if test="infoResult != null and infoResult != ''">#{infoResult},</if>
+            <if test="infoDept != null">#{infoDept},</if>
+            <if test="infoHospital != null and infoHospital != ''">#{infoHospital},</if>
+            <if test="infoConsequence != null and infoConsequence != ''">#{infoConsequence},</if>
+            <if test="infoDoctor != null and infoDoctor != ''">#{infoDoctor},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHealthInfo" parameterType="HealthInfo">
+        update health_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="infoCode != null and infoCode != ''">info_code = #{infoCode},</if>
+            <if test="infoCardno != null and infoCardno != ''">info_cardno = #{infoCardno},</if>
+            <if test="infoName != null and infoName != ''">info_name = #{infoName},</if>
+            <if test="infoSex != null">info_sex = #{infoSex},</if>
+            <if test="infoAge != null">info_age = #{infoAge},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="healthItemId != null">health_item_id = #{healthItemId},</if>
+            <if test="infoPhone != null">info_phone = #{infoPhone},</if>
+            <if test="infoInform != null and infoInform != ''">info_inform = #{infoInform},</if>
+            <if test="infoResult != null and infoResult != ''">info_result = #{infoResult},</if>
+            <if test="infoDept != null">info_dept = #{infoDept},</if>
+            <if test="infoHospital != null and infoHospital != ''">info_hospital = #{infoHospital},</if>
+            <if test="infoConsequence != null and infoConsequence != ''">info_consequence = #{infoConsequence},</if>
+            <if test="infoDoctor != null and infoDoctor != ''">info_doctor = #{infoDoctor},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where info_id = #{infoId}
+    </update>
+
+    <delete id="deleteHealthInfoById" parameterType="Long">
+        delete from health_info where info_id = #{infoId}
+    </delete>
+
+    <delete id="deleteHealthInfoByIds" parameterType="String">
+        delete from health_info where info_id in 
+        <foreach item="infoId" collection="array" open="(" separator="," close=")">
+            #{infoId}
+        </foreach>
+    </delete>
+</mapper>

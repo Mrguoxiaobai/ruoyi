@@ -51,7 +51,10 @@ public class HealthItemController extends BaseController
         List<HealthItem> list = healthItemService.selectHealthItemList(healthItem);
         for (HealthItem heal:list) {
             SysDept sysDept = sysDeptMapper.selectDeptById(heal.getDeptId());
-            heal.setDeptName(sysDept.getDeptName());
+            if(sysDept!=null){
+                heal.setDeptName(sysDept.getDeptName());
+            }
+
         }
         for (HealthItem li:list) {
             System.out.println(li);

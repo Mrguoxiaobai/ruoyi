@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 @DataSource(value = DataSourceType.SLAVE)
-public interface TestMapper {
+public interface StjksMapper {
 
     @Select("select count(*) from  PeisPatient")
     public int count();
