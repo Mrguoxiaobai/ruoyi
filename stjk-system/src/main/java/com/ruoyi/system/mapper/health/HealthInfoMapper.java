@@ -1,7 +1,7 @@
 package com.ruoyi.system.mapper.health;
 
 import java.util.List;
-import com.ruoyi.system.health.domain.HealthInfo;
+import com.ruoyi.system.domain.health.HealthInfo;
 
 /**
  * 重大阳性信息Mapper接口

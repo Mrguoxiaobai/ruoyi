@@ -74,7 +74,7 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="科室名称" prop="deptId">
+<!--          <el-form-item label="科室名称" prop="deptId">
             <el-input
               v-model="queryParams.deptId"
               placeholder="请输入科室名称"
@@ -82,7 +82,7 @@
               size="small"
               @keyup.enter.native="handleQuery"
             />
-          </el-form-item>
+          </el-form-item>-->
           <el-form-item label="项目名称" prop="healthItemId">
             <el-input
               v-model="queryParams.healthItemId"
@@ -198,14 +198,14 @@
           </el-col>
           <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
         </el-row>
-        <el-table v-loading="loading" :data="infoList" @selection-change="handleSelectionChange">
+        <el-table  style="width: 100%" v-loading="loading" :data="infoList" @selection-change="handleSelectionChange" >
           <el-table-column type="selection" width="55" align="center"/>
           <el-table-column label="编号" align="center" prop="infoId"/>
           <el-table-column label="体检号" align="center" prop="infoCode"/>
           <el-table-column label="身份证号" align="center" prop="infoCardno"/>
           <el-table-column label="姓名" align="center" prop="infoName"/>
           <el-table-column label="年龄" align="center" prop="infoAge" />
-          <el-table-column label="性别" align="center" prop="infoSex" :formatter="infoSexFormat"/>
+          <el-table-column label="性别" align="center" prop="infoSex" />
           <el-table-column label="科室名称" align="center" prop="deptName"/>
           <el-table-column label="项目名称" align="center" prop="healthItemName"/>
           <el-table-column label="手机号" align="center" prop="infoPhone"/>
@@ -227,7 +227,7 @@
               <span>{{ parseTime(scope.row.updateTime, '{y}-{m}-{d} {h}:{m}:{s}') }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+          <el-table-column   label="操作" align="center" class-name="small-padding fixed-width">
             <template slot-scope="scope">
               <el-button
                 size="mini"
@@ -438,7 +438,6 @@ export default {
     };
   },
   created() {
-    this.getList();
     this.getUser();
     this.getTreeselect();
     this.getTreeselectitme();
@@ -465,12 +464,11 @@ export default {
         this.deptOptions = response.data;
       });
     },
-    getUserInfo(){
-
-    },
     getUser(){
       getUserProfile().then(response => {
-        this.queryParams.deptId=response.data.deptId;
+        //this.queryParams.deptId=response.data.deptId;
+        this.user=response.data;
+        this.getList(this.user.deptId);
       });
     },
 
@@ -491,13 +489,14 @@ export default {
     // 节点单击事件
     handleNodeClick(data) {
       this.queryParams.deptId = data.id;
-      this.getList();
+      this.getList(data.id);
     },
 
     /** 查询重大阳性信息列表 */
-    getList() {
+    getList(deptId) {
       this.loading = true;
       this.queryParams.params = {};
+      this.queryParams.deptId=deptId;
       if (null != this.daterangeCreateTime && '' != this.daterangeCreateTime) {
         this.queryParams.params["beginCreateTime"] = this.daterangeCreateTime[0];
         this.queryParams.params["endCreateTime"] = this.daterangeCreateTime[1];
@@ -557,7 +556,7 @@ export default {
     /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNum = 1;
-      this.getList();
+      this.getList(this.user.deptId);
     },
     /** 重置按钮操作 */
     resetQuery() {

@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.healthItem;
+package com.ruoyi.web.controller.health;
 
 import java.util.List;
 

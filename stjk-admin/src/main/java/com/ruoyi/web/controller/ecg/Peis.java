@@ -1,11 +1,9 @@
 package com.ruoyi.web.controller.ecg;
 
-import com.ruoyi.system.domain.ecg.PeisPatient;
-import com.ruoyi.system.mapper.StjksMapper;
+import com.ruoyi.system.mapper.ecg.StjksMapper;
 import com.ruoyi.system.mapper.ecg.PeisPatientMapper;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 public class Peis {
 
@@ -17,12 +15,12 @@ public class Peis {
 }
 class test{
     @Resource
-    static private PeisPatientMapper peisPatientMapper;
+    private PeisPatientMapper peisPatientMapper;
     @Resource
     private StjksMapper stjksMapper;
 
     public void te(){
-        System.out.println(stjksMapper.count());
+        //System.out.println(stjksMapper.count());
      /*   List<PeisPatient> peisPatients = stjksMapper.peisList();
         List<PeisPatient> peisPatients1 = stjksMapper.warePeisList();
         for (PeisPatient  p:peisPatients) {

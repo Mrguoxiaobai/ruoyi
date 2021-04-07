@@ -1,4 +1,4 @@
-package com.ruoyi.system.health.domain;
+package com.ruoyi.system.domain.health;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

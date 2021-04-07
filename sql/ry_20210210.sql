@@ -726,6 +726,21 @@ create table  health_info(
     update_time      datetime                                   comment '更新时间',
     primary key (info_id)
 )engine=innodb auto_increment=1 comment = '重大阳性信息表';
+-- ----------------------------
+-- 22、重大阳性统计表
+-- ----------------------------
+drop table if exists health_report;
+create table  health_report(
+  report_id          bigint(20)      not null auto_increment    comment '编号',
+  report_name        varchar(50)                                comment '名称',
+  report_count       int                                        comment '人数',
+  create_by        varchar(64)     default ''                   comment '创建者',
+  create_time      datetime                                     comment '创建时间',
+  update_by        varchar(64)     default ''                   comment '更新者',
+  update_time      datetime                                     comment '更新时间',
+  primary key (report_id)
+)engine=innodb auto_increment=1 comment = '重大阳性统计表';
+
 
 -- ----------------------------
 -- 22、体检者信息表
@@ -777,4 +792,40 @@ CREATE TABLE PeisPatient(
         primary key (PeisPatient_id)
         )engine=innodb auto_increment=1 comment = '体检者信息表';
 
+-- ----------------------------
+-- 23、题目信息表
+-- ----------------------------
+drop table if exists subjet;
+CREATE TABLE subjet (
+  subjet_id  bigint(20)      not null auto_increment    comment '编号',
+  subjet_name   varchar (100)	                        comment '题目',
+  subjet_a varchar(100)                                 comment '选项A',
+  subjet_b varchar(100)                                 comment '选项B',
+  subjet_c varchar(100)                                 comment '选项C',
+  subjet_d varchar(100)                                 comment '选项D',
+  subjet_e varchar(100)                                 comment '选项E',
+  subjet_group varchar(50)                              comment '题目分类',
+  create_by        varchar(64)     default ''           comment '创建者',
+  create_time      datetime                             comment '创建时间',
+  update_by        varchar(64)     default ''           comment '更新者',
+  update_time      datetime                             comment '更新时间',
+  primary key (subjet_id)
+) engine=innodb auto_increment=1 comment = '题目信息表';
 
+
+
+-- ----------------------------
+-- 24、结论信息表
+-- ----------------------------
+DROP TABLE IF EXISTS subjet_genre;
+CREATE TABLE subjet_genre (
+    genre_id  bigint(20)      not null auto_increment     comment '编号',
+    genre_name varchar (100)	                          comment '结论名称',
+    genre varchar(20) 	                                  comment '结论等级',
+    genre_des varchar(100)                                comment '结论描述',
+    create_by        varchar(64)     default ''           comment '创建者',
+    create_time      datetime                             comment '创建时间',
+    update_by        varchar(64)     default ''           comment '更新者',
+    update_time      datetime                             comment '更新时间',
+    primary key (genre_id)
+) engine=innodb auto_increment=1 comment = '结论信息表';

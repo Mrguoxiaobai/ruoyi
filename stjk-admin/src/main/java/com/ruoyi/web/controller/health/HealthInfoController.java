@@ -1,16 +1,12 @@
-package com.ruoyi.web.controller.healthItem;
+package com.ruoyi.web.controller.health;
 
 import java.util.List;
 
 import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.system.domain.health.HealthItem;
-import com.ruoyi.system.mapper.SysDeptMapper;
-import com.ruoyi.system.mapper.health.HealthItemMapper;
 import com.ruoyi.system.service.ISysDeptService;
 import com.ruoyi.system.service.health.IHealthItemService;
-import com.ruoyi.system.service.impl.SysDeptServiceImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,8 +19,8 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.system.health.domain.HealthInfo;
-import com.ruoyi.system.health.service.IHealthInfoService;
+import com.ruoyi.system.domain.health.HealthInfo;
+import com.ruoyi.system.service.health.IHealthInfoService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 

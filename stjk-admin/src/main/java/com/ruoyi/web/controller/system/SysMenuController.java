@@ -73,6 +73,7 @@ public class SysMenuController extends BaseController
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         Long userId = loginUser.getUser().getUserId();
         List<SysMenu> menus = menuService.selectMenuList(menu, userId);
+        System.out.println(menus);
         return AjaxResult.success(menuService.buildMenuTreeSelect(menus));
     }
 

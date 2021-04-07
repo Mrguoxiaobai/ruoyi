@@ -1,10 +1,12 @@
 package com.ruoyi.system.service.impl.healthimpl;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.system.domain.ecg.PeisPatient;
+import com.ruoyi.system.mapper.ecg.StjksMapper;
 import org.springframework.stereotype.Service;
 import com.ruoyi.system.mapper.health.HealthInfoMapper;
-import com.ruoyi.system.health.domain.HealthInfo;
-import com.ruoyi.system.health.service.IHealthInfoService;
+import com.ruoyi.system.domain.health.HealthInfo;
+import com.ruoyi.system.service.health.IHealthInfoService;
 
 import javax.annotation.Resource;
 
@@ -19,6 +21,8 @@ public class HealthInfoServiceImpl implements IHealthInfoService
 {
     @Resource
     private HealthInfoMapper healthInfoMapper;
+    @Resource
+    private StjksMapper stjksMapper;
 
     /**
      * 查询重大阳性信息
@@ -53,8 +57,17 @@ public class HealthInfoServiceImpl implements IHealthInfoService
     @Override
     public int insertHealthInfo(HealthInfo healthInfo)
     {
-        healthInfo.setCreateTime(DateUtils.getNowDate());
-        return healthInfoMapper.insertHealthInfo(healthInfo);
+        PeisPatient peisPatient = stjksMapper.peisListById(healthInfo.getInfoCardno());
+        System.out.println(peisPatient);
+        if(peisPatient!=null){
+            healthInfo.setInfoDept(peisPatient.getOrgName());
+            healthInfo.setInfoSex(peisPatient.getSex());
+            healthInfo.setInfoAge(peisPatient.getAge());
+            healthInfo.setInfoPhone(peisPatient.getPhone());
+        }
+
+         healthInfo.setCreateTime(DateUtils.getNowDate());
+         return healthInfoMapper.insertHealthInfo(healthInfo);
     }
 
     /**
