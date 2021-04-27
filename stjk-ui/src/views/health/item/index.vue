@@ -144,6 +144,7 @@ import { listItem, getItem, delItem, addItem, updateItem, exportItem } from "@/a
 import {treeselect} from "@/api/system/dept";
 import Treeselect from "@riophae/vue-treeselect";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
+import {getUserProfile} from "@/api/system/user";
 export default {
   name: "Item",
   components: {Treeselect},
@@ -202,7 +203,7 @@ watch: {
   }
 },
   created() {
-    this.getList();
+    this.getUser();
     this.getTreeselect();
   },
   methods: {
@@ -220,11 +221,20 @@ watch: {
     // 节点单击事件
     handleNodeClick(data) {
       this.queryParams.deptId = data.id;
-      this.getList();
+      this.getList(data.id);
+    },
+    getUser(){
+      getUserProfile().then(response => {
+        //this.queryParams.deptId=response.data.deptId;
+        this.user=response.data;
+        this.getList(this.user.deptId);
+      });
     },
     /** 查询重大阳性项目列表 */
-    getList() {
+    getList(deptId) {
       this.loading = true;
+      this.queryParams.params = {};
+      this.queryParams.deptId=deptId;
       listItem(this.queryParams).then(response => {
         this.itemList = response.rows;
         this.total = response.total;
@@ -252,7 +262,7 @@ watch: {
     /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNum = 1;
-      this.getList();
+      this.getList(this.user.deptId);
     },
     /** 重置按钮操作 */
     resetQuery() {

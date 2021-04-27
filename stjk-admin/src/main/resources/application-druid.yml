@@ -15,7 +15,7 @@ spring:
                 enabled: true
                 url: jdbc:sqlserver://192.168.1.101:1433;DatabaseName=HerPeisSTTJZX
                 username: sa
-                password: root
+                password: herpeis
             # 初始连接数
             initialSize: 5
             # 最小连接池数量

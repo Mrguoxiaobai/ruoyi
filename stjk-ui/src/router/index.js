@@ -41,7 +41,15 @@ export const constantRoutes = [
   {
     path: '/login',
     component: (resolve) => require(['@/views/login'], resolve),
-    hidden: true
+    hidden: true,
+  },
+  {
+    path: '/psy',
+    component: (resolve) => require(['@/views/exam/psy'], resolve),
+    hidden: true,
+    meta: {
+      title: '答题'
+    }
   },
   {
     path: '/404',

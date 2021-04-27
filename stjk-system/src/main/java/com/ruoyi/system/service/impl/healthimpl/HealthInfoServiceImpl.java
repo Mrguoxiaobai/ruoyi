@@ -58,7 +58,6 @@ public class HealthInfoServiceImpl implements IHealthInfoService
     public int insertHealthInfo(HealthInfo healthInfo)
     {
         PeisPatient peisPatient = stjksMapper.peisListById(healthInfo.getInfoCardno());
-        System.out.println(peisPatient);
         if(peisPatient!=null){
             healthInfo.setInfoDept(peisPatient.getOrgName());
             healthInfo.setInfoSex(peisPatient.getSex());

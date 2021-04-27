@@ -39,7 +39,7 @@ public class EcgYearCountController extends BaseController
     /**
      * 查询历年体检数据列表
      */
-    @PreAuthorize("@ss.hasPermi('ecg:pcount:list')")
+   // @PreAuthorize("@ss.hasPermi('ecg:pcount:list')")
     @GetMapping("/list")
     public TableDataInfo list(EcgYearCount ecgYearCount)
     {

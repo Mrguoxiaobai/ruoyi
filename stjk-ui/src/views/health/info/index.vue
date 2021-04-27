@@ -198,7 +198,7 @@
           </el-col>
           <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
         </el-row>
-        <el-table  style="width: 100%" v-loading="loading" :data="infoList" @selection-change="handleSelectionChange" >
+        <el-table class="table" style="width: 100%" v-loading="loading" :data="infoList" @selection-change="handleSelectionChange" >
           <el-table-column type="selection" width="55" align="center"/>
           <el-table-column label="编号" align="center" prop="infoId"/>
           <el-table-column label="体检号" align="center" prop="infoCode"/>
@@ -209,7 +209,16 @@
           <el-table-column label="科室名称" align="center" prop="deptName"/>
           <el-table-column label="项目名称" align="center" prop="healthItemName"/>
           <el-table-column label="手机号" align="center" prop="infoPhone"/>
-          <el-table-column label="通知本人" align="center" prop="infoInform" :formatter="infoInformFormat"/>
+          <el-table-column label="通知本人" align="center" prop="infoInform"  :formatter="infoInformFormat">
+            <template slot-scope="scope">
+              <el-tag
+                plain
+                size="small"
+                :type="scope.row.infoInform=='1' ? 'success' : 'danger'">
+                {{scope.row.infoInform==1?'已通知':'未通知'}}
+              </el-tag>
+            </template>
+          </el-table-column>
           <el-table-column label="单位名称" align="center" prop="infoDept"/>
           <el-table-column label="体检医师" align="center" prop="infoDoctor"/>
           <el-table-column label="阳性结果" align="center" prop="infoResult"/>
@@ -440,7 +449,7 @@ export default {
   created() {
     this.getUser();
     this.getTreeselect();
-    this.getTreeselectitme();
+
     this.getDicts("sys_user_sex").then(response => {
       this.infoAgeOptions = response.data;
     });
@@ -469,13 +478,16 @@ export default {
         //this.queryParams.deptId=response.data.deptId;
         this.user=response.data;
         this.getList(this.user.deptId);
+        this.getTreeselectitme(this.user.deptId);
       });
     },
 
 
     /** 查询项目下拉结构 */
-    getTreeselectitme() {
-      listItem( this.queryParams.deptId).then(response => {
+    getTreeselectitme(deptId) {
+      this.queryParams.params = {};
+      this.queryParams.deptId=deptId;
+      listItem(this.queryParams).then(response => {
         this.healthItemOptions = response.rows;
         this.queryParams.deptId='';
       });
@@ -640,3 +652,4 @@ export default {
   }
 };
 </script>
+
